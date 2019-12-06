@@ -1,0 +1,4 @@
+export const USER_LOG_IN_PENDING = 'USER_LOG_IN_PENDING';
+export const USER_LOG_IN_SUCCESS = 'USER_LOG_IN_SUCCESS';
+export const USER_LOG_IN_ERROR = 'USER_LOG_IN_ERROR';
+export const USER_LOG_OUT = 'USER_LOG_OUT';
