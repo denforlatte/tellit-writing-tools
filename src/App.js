@@ -5,12 +5,13 @@ import store from './store';
 
 import './App.css';
 
-import MainMenu from './components/MainMenu';
+import MainMenu from './components/MainMenu/';
 
 import setAuthHeader from './utils/setAuthHeader'
 
 // Scenes
 import Login from './views/Login';
+import Universes from './views/Universes';
 
 if (localStorage.token) {
   setAuthHeader(localStorage.token);
@@ -25,8 +26,9 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <MainMenu />
+        // TODO refactor to Routes with Private Routes
         <Switch>
-          <Route exact path="/" component={Login} />
+          <Route exact path="/" component={Universes} />
           <Route exact path="/login" component={Login} />
           <Route component={Login} />
         </Switch>

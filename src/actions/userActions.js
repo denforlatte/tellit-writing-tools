@@ -14,9 +14,11 @@ export const logInUser = ({email, password}) => async dispatch => {
   }
 
   const body = JSON.stringify({email, password});
+  console.log(body);
 
   try {
-      const res = await axios.post('users/login', body, config);
+      // TODO refactor host
+      const res = await axios.post('http://localhost:5060/users/login', body, config);
       if (!res.data.token) throw new Error('No token.')
 
       setAuthHeader(res.data.token)
@@ -27,10 +29,11 @@ export const logInUser = ({email, password}) => async dispatch => {
       })
   } catch (error) {
       const errors = error.response.data.errors;
+      console.log(errors);
 
       // TODO Create a standard error flow
       if (errors) {
-          errors.forEach(error => alert(error.message));
+          errors.forEach(error => alert(error.msg));
       }
       
       dispatch({
@@ -63,11 +66,11 @@ export const loadLocallySavedUser = () => async dispatch => {
   }
 };
 
-export const logout = () => dispatch => {
-  dispatch({
-      type: CLEAR_PROFILE
-  });
-  dispatch({
-      type: LOGOUT
-  });
-};
+// export const logout = () => dispatch => {
+//   dispatch({
+//       type: CLEAR_PROFILE
+//   });
+//   dispatch({
+//       type: LOGOUT
+//   });
+// };
