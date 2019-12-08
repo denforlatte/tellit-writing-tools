@@ -28,16 +28,17 @@ export const logInUser = ({email, password}) => async dispatch => {
           payload: res.data
       })
   } catch (error) {
-      const errors = error.response.data.errors;
-      console.log(errors);
+      // const errors = error.response.data.errors;
+      console.error(error);
 
       // TODO Create a standard error flow
-      if (errors) {
-          errors.forEach(error => alert(error.msg));
-      }
+    //   if (errors) {
+    //       errors.forEach(error => alert(error.msg));
+    //   }
       
       dispatch({
           type: USER_LOG_IN_ERROR
+          // Add errors array.
       })
   }
 };
