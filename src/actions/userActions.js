@@ -31,13 +31,10 @@ export const logInUser = ({email, password}) => async dispatch => {
       console.error(error.message);
 
       // TODO Create a standard error flow
-    //   if (errors) {
-    //       errors.forEach(error => alert(error.msg));
-    //   }
       
       dispatch({
-          type: USER_LOG_IN_ERROR
-          // Add errors array.
+          type: USER_LOG_IN_ERROR,
+          payload: error,
       })
   }
 };

@@ -4,9 +4,6 @@ export const USER_LOG_IN_SUCCESS = 'USER_LOG_IN_SUCCESS';
 export const USER_LOG_IN_ERROR = 'USER_LOG_IN_ERROR';
 export const USER_LOG_OUT = 'USER_LOG_OUT';
 
-// App Management
-export const APP_MODAL_ERROR = 'APP_MODAL_ERROR';
-
 // Universe Actions
 export const UNIVERSES_FETCH_PENDING = 'UNIVERSES_FETCH_PENDING';
 export const UNIVERSES_FETCH_SUCCESS = 'UNIVERSES_FETCH_SUCCESS';
