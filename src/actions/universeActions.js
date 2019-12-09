@@ -42,6 +42,23 @@ export const clearSelectedUniverse = () => async dispatch => {
   })
 }
 
-export const createUniverse = name => async dispatch => {
+export const createUniverse = ({name}) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
+  const body = JSON.stringify({name});
+
+  try {
+    const res = await axios.post('universes', body, config);
+
+    // TODO add universe to universe array
+        
+  } catch (error) {
+    console.error(error.message);
+
+    // TODO error modal
+  }
 }

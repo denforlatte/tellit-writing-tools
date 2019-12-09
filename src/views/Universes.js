@@ -1,26 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Col, Row } from 'reactstrap';
+import { Container, Col, Row, Card, CardTitle } from 'reactstrap';
 
-import {getUniverses} from '../actions/universeActions';
+import { getUniverses, createUniverse } from '../actions/universeActions';
 
 import Universe from '../components/Universe';
 
-const Universes = ({getUniverses, universes}) => {
-  // TODO only fetch if universes are not in state
+const Universes = ({ getUniverses, createUniverse, universes }) => {
   if (!universes) {
     getUniverses();
   }
 
+  const handleClick = () => alert('test Universe');
+
   return (
     <Container>
-      <br/>
+      <br />
+      {universes &&
+        universes.map(universe => (
+          <Row key={universe._id}>
+            <Col>
+              <Universe universe={universe} />
+            </Col>
+          </Row>
+        ))}
       <Row>
         <Col>
-          {universes && universes.map(universe => (
-            <Universe key={universe._id} universe={universe} />
-          ))}
+          <Card body inverse color='primary' onClick={handleClick}>
+            <CardTitle>Create new Universe...</CardTitle>
+          </Card>
         </Col>
       </Row>
     </Container>
@@ -33,6 +42,6 @@ Universes.propTypes = {
 
 const mapStateToProps = state => ({
   universes: state.universes.universes,
-})
+});
 
-export default connect(mapStateToProps, {getUniverses})(Universes);
+export default connect(mapStateToProps, { getUniverses, createUniverse })(Universes);
