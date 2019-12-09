@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   NavbarText,
 } from 'reactstrap';
 import './mainMenu.scss';
@@ -18,22 +17,22 @@ const MainMenu = () => {
 
   return (
     <Navbar color="primary" light expand="md">
-      <NavbarBrand href="/"><h1>Tellit</h1></NavbarBrand>
+      <Link to="/"><h1>Tellit</h1></Link>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
           <NavItem>
-            <NavLink href="/components/"><h3>Select Universe</h3></NavLink>
+            <Link to='/'><h3>Select Universe</h3></Link>
           </NavItem>
           <NavItem>
-            <NavLink href="https://github.com/reactstrap/reactstrap">
+            <Link to="https://github.com/reactstrap/reactstrap">
               <h3>Characters</h3>
-            </NavLink>
+            </Link>
           </NavItem>
           <NavItem>
-            <NavLink href="https://github.com/reactstrap/reactstrap">
+            <Link to="https://github.com/reactstrap/reactstrap">
               <h3>Books</h3>
-            </NavLink>
+            </Link>
           </NavItem>
         </Nav>
         <NavbarText>Simple Text</NavbarText>

@@ -13,9 +13,9 @@ const initialState = {
 };
 
 const userReducer = (state = initialState, action) => {
-  const { payload } = action;
+  const { type, payload } = action;
 
-  switch (action.type) {
+  switch (type) {
     case USER_LOG_IN_PENDING:
       return {
         ...state,
