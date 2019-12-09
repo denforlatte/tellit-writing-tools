@@ -21,10 +21,11 @@ export const getUniverses = () => async dispatch => {
     })
   } catch (error) {
     // TODO Error modal
+    console.error(error.message);
 
     dispatch({
       type: UNIVERSES_FETCH_ERROR,
-      errors: [],
+      payload: error,
     });
   }
 };

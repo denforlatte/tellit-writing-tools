@@ -7,6 +7,7 @@ import './App.css';
 
 import MainMenu from './components/MainMenu/';
 import Routes from './Routes';
+import ErrorModal from './components/modals/ErrorModal';
 
 import setAuthHeader from './utils/setAuthHeader';
 import { loadLocallySavedUser } from './actions/userActions';
@@ -27,6 +28,7 @@ const App = () => {
       <Router>
         <MainMenu />
         <Routes />
+        <ErrorModal />
       </Router>
     </Provider>
   );
