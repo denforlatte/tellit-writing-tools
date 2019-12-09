@@ -1,16 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux';
 
-const ErrorModal = props => {
+const ErrorModal = ({ errors }) => {
+  if (!errors || errors.length <= 0) {
+    return;
+  }
+
   return (
-    <div>
-      Computer says no.
-    </div>
+    <div>{errors.map((error, i) => (
+      <div key={i}>{error}</div>
+    ))}</div>
   )
 }
 
 ErrorModal.propTypes = {
-
+  errors: PropTypes.array,
 }
 
-export default ErrorModal
+const mapStateToProps = state => ({
+  errors: state.appManagement.errors,
+})
+
+export default connect(mapStateToProps)(ErrorModal)
