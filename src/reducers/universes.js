@@ -4,6 +4,7 @@ import {
   UNIVERSES_FETCH_ERROR,
   UNIVERSES_SELECT_ONE,
   UNIVERSES_CLEAR_SELECTED,
+  UNIVERSES_ADD_ONE,
 } from '../actions/types';
 
 const initialState = {
@@ -43,6 +44,11 @@ const universesReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedUniverse: false,
+      }
+    case UNIVERSES_ADD_ONE:
+      return {
+        ...state,
+        universes: [...state.universes, payload],
       }
     default: 
       return state;

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import setAuthHeader from '../utils/setAuthHeader';
-import { USER_LOG_IN_PENDING, USER_LOG_IN_SUCCESS, USER_LOG_IN_ERROR } from './types';
+import { USER_LOG_IN_PENDING, USER_LOG_IN_SUCCESS, USER_LOG_IN_ERROR, APP_MODAL_ERROR } from './types';
 
 export const logInUser = ({email, password}) => async dispatch => {
   dispatch({
@@ -33,7 +33,7 @@ export const logInUser = ({email, password}) => async dispatch => {
       // TODO Create a standard error flow
       
       dispatch({
-          type: USER_LOG_IN_ERROR,
+          type: APP_MODAL_ERROR,
           payload: error,
       })
   }
@@ -54,7 +54,7 @@ export const loadLocallySavedUser = () => async dispatch => {
 
   try {
       const res = await axios.get('users/authorise');
-      console.log(res);
+      
       dispatch({
           type: USER_LOG_IN_SUCCESS,
           payload: res.data

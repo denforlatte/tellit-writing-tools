@@ -5,6 +5,8 @@ import {
   UNIVERSES_FETCH_ERROR,
   UNIVERSES_SELECT_ONE,
   UNIVERSES_CLEAR_SELECTED,
+  UNIVERSES_ADD_ONE,
+  APP_MODAL_ERROR,
 } from './types';
 
 export const getUniverses = () => async dispatch => {
@@ -18,7 +20,7 @@ export const getUniverses = () => async dispatch => {
     dispatch({
       type: UNIVERSES_FETCH_SUCCESS,
       payload: res.data,
-    })
+    });
   } catch (error) {
     // TODO Error modal
     console.error(error.message);
@@ -34,32 +36,40 @@ export const selectUniverse = universe => async dispatch => {
   dispatch({
     type: UNIVERSES_SELECT_ONE,
     payload: universe,
-  })
+  });
 };
 
 export const clearSelectedUniverse = () => async dispatch => {
   dispatch({
     type: UNIVERSES_CLEAR_SELECTED,
-  })
-}
+  });
+};
 
-export const createUniverse = ({name}) => async dispatch => {
+export const createUniverse = ({ name }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const body = JSON.stringify({name});
+  const body = JSON.stringify({ name });
 
   try {
     const res = await axios.post('universes', body, config);
+    console.log(res);
 
     // TODO add universe to universe array
-        
+    dispatch({
+      type: UNIVERSES_ADD_ONE,
+      payload: res.data,
+    });
   } catch (error) {
     console.error(error.message);
 
     // TODO error modal
+    dispatch({
+      type: APP_MODAL_ERROR,
+      payload: error,
+    });
   }
-}
+};

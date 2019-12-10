@@ -12,8 +12,6 @@ const Universes = ({ getUniverses, createUniverse, universes }) => {
     getUniverses();
   }
 
-  const handleClick = () => alert('test Universe');
-
   return (
     <Container>
       <br />
@@ -27,7 +25,11 @@ const Universes = ({ getUniverses, createUniverse, universes }) => {
         ))}
       <Row>
         <Col>
-          <Card body inverse color='primary' onClick={handleClick}>
+          <Card
+            body
+            inverse
+            color='primary'
+            onClick={() => createUniverse({name: 'My New Universe'})}>
             <CardTitle>Create new Universe...</CardTitle>
           </Card>
         </Col>
@@ -44,4 +46,6 @@ const mapStateToProps = state => ({
   universes: state.universes.universes,
 });
 
-export default connect(mapStateToProps, { getUniverses, createUniverse })(Universes);
+export default connect(mapStateToProps, { getUniverses, createUniverse })(
+  Universes
+);

@@ -1,18 +1,16 @@
 import {
-  UNIVERSES_FETCH_ERROR,
-  USER_LOG_IN_ERROR,
+  APP_MODAL_ERROR,
 } from '../actions/types';
 
 const initialState = {
-  errors: [1, 2, 3 ],
+  errors: null,
 };
 
 const appManagementReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case USER_LOG_IN_ERROR:
-    case UNIVERSES_FETCH_ERROR:
+    case APP_MODAL_ERROR:
       return {
         ...state,
         errors: payload.errors
