@@ -8,6 +8,7 @@ import {
   UNIVERSES_ADD_ONE,
   APP_MODAL_ERROR,
 } from './types';
+import store from '../store';
 
 export const getUniverses = () => async dispatch => {
   dispatch({
@@ -32,11 +33,20 @@ export const getUniverses = () => async dispatch => {
   }
 };
 
-export const selectUniverse = universe => async dispatch => {
-  dispatch({
-    type: UNIVERSES_SELECT_ONE,
-    payload: universe,
-  });
+export const selectUniverse = universeId => async dispatch => {
+  // TODO fetch all universes when user logs in
+
+  // TODO: check universe is in store or show error
+  const universeIds = store.getState().universes.universes.map(x => x._id);
+
+  if (universeIds.includes(universeId)) {
+    dispatch({
+      type: UNIVERSES_SELECT_ONE,
+      payload: universeId,
+    });
+  } else {
+    // TODO redirect to universes and show error modal.
+  }
 };
 
 export const clearSelectedUniverse = () => async dispatch => {

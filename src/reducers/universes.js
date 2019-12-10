@@ -11,7 +11,7 @@ const initialState = {
   isLoading: false,
   universes: null,
   selectedUniverse: false,
-}
+};
 
 const universesReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -21,7 +21,7 @@ const universesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        universes: [],
+        universes: null,
         selectedUniverse: false,
       };
     case UNIVERSES_FETCH_SUCCESS:
@@ -38,21 +38,23 @@ const universesReducer = (state = initialState, action) => {
     case UNIVERSES_SELECT_ONE:
       return {
         ...state,
-        selectedUniverse: payload,
-      }
+        selectedUniverse: state.universes.find(
+          universe => universe._id === payload
+        ),
+      };
     case UNIVERSES_CLEAR_SELECTED:
       return {
         ...state,
         selectedUniverse: false,
-      }
+      };
     case UNIVERSES_ADD_ONE:
       return {
         ...state,
         universes: [...state.universes, payload],
-      }
-    default: 
+      };
+    default:
       return state;
   }
-}
+};
 
 export default universesReducer;
