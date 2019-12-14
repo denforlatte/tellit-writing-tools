@@ -32,3 +32,7 @@ export const getCharacters = (universeId) => async dispatch => {
     })
   }
 }
+
+export const selectCharacter = characterId => async dispatch => {
+  // TODO select character
+}

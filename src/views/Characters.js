@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Container, Row, ListGroup, ListGroupItem } from 'reactstrap';
 
 import { getCharacters } from '../actions/characterActions';
 
 const Characters = ({
-  characters: { isLoading, majorCharacters, minorCharacters },
+  characters: { isLoading, majorCharacters, minorCharacters, selectedCharacter },
   getCharacters,
   user,
   match,
@@ -18,14 +18,18 @@ const Characters = ({
     }
   }, [user]);
 
+  if (selectedCharacter) {
+    return <Redirect to={`${match.url}/${selectedCharacter._id}`} />
+  }
+
   return (
     <Container>
       <h2>Major Characters</h2>
       <ListGroup>
         {majorCharacters &&
           majorCharacters.map(character => (
-            <ListGroupItem>
-              <Link to={`${match.path}/:characterId`}>{character.name}</Link>
+            <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>
+              {character.name}
             </ListGroupItem>
           ))}
       </ListGroup>
@@ -34,8 +38,7 @@ const Characters = ({
       <ListGroup>
         {minorCharacters &&
           minorCharacters.map(character => (
-            <ListGroupItem onClick={() => alert('hi')}>
-              <Link to={`${match.path}/:characterId`}>{character.name}</Link>
+            <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>{character.name}
             </ListGroupItem>
           ))}
       </ListGroup>
