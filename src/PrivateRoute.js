@@ -13,9 +13,6 @@ const PrivateRoute = ({
     <Route
       {...rest}
       render={props => {
-        console.log('redirect to login?');
-        console.log('isAuthenticated :', isAuthenticated);
-        console.log('isLoading :', isLoading);
         return !isAuthenticated && !isLoading ? (
         <Redirect to='/login'/>
       ) : (

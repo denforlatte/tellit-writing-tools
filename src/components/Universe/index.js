@@ -6,7 +6,6 @@ import { Card, CardTitle, CardText } from 'reactstrap';
 import { universeCard } from './universe.module.scss';
 
 const Universe = ({ universe }) => {
-  console.log('universe :', universe);
   return (
     <Link to={`/u/${universe._id}`}>
       <Card body inverse color='primary' className={universeCard}>

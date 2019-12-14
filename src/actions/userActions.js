@@ -41,7 +41,6 @@ export const logInUser = ({email, password}) => async dispatch => {
 
 // TODO What am I even trying to do here?
 export const loadLocallySavedUser = () => async dispatch => {
-    console.log('localStorage.token :', localStorage.token);
   if (!localStorage.token) {
       setAuthHeader();
       // TODO redirect to login page
@@ -58,10 +57,7 @@ export const loadLocallySavedUser = () => async dispatch => {
   setAuthHeader(localStorage.token);
 
   try {
-      console.log(axios.defaults.headers.common['auth-token']);
       const res = await axios.get('/users/authorise');
-      console.log('auth res: ');
-      console.log(res);
       
       dispatch({
           type: USER_LOG_IN_SUCCESS,

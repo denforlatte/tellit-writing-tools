@@ -11,15 +11,12 @@ import {
 import store from '../store';
 
 export const getCharacters = (universeId) => async dispatch => {
-  console.log('getCharacters');
   dispatch({
     type: CHARACTERS_FETCH_PENDING,
   });
 
   try {
-    console.log('universeId: ', universeId);
     const res = await axios.get(`/universes/${universeId}/characters`);
-    console.log(res);
 
     dispatch({
       type: CHARACTERS_FETCH_SUCCESS,
