@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import { selectUniverse } from '../actions/universeActions';
 
 const Universe = ({universe, match, selectUniverse}) => {
-  // TODO Check store for this universe
+  // TODO This doesn't work. Just fetch it. :/
   if (!universe || universe.id !== match.params.universeId) {
     console.log('Set correct universe');
     selectUniverse(match.params.universeId);

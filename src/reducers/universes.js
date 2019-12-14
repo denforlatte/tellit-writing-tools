@@ -9,7 +9,7 @@ import {
 
 const initialState = {
   isLoading: false,
-  universes: null,
+  universes: [],
   selectedUniverse: false,
 };
 

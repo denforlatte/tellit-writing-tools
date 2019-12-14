@@ -66,7 +66,6 @@ export const createUniverse = ({ name }) => async dispatch => {
 
   try {
     const res = await axios.post('universes', body, config);
-    console.log(res);
 
     // TODO add universe to universe array
     dispatch({

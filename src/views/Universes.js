@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Container, Col, Row, Card, CardTitle } from 'reactstrap';
@@ -8,14 +8,14 @@ import { getUniverses, createUniverse } from '../actions/universeActions';
 import Universe from '../components/Universe';
 
 const Universes = ({ getUniverses, createUniverse, universes }) => {
-  if (!universes) {
+  useEffect(() => {
     getUniverses();
-  }
+  }, [])
 
   return (
     <Container>
       <br />
-      {universes &&
+      {universes && universes.length > 0 &&
         universes.map(universe => (
           <Row key={universe._id}>
             <Col>
@@ -40,6 +40,8 @@ const Universes = ({ getUniverses, createUniverse, universes }) => {
 
 Universes.propTypes = {
   universes: PropTypes.array,
+  getUniverses: PropTypes.func.isRequired,
+  createUniverse: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({

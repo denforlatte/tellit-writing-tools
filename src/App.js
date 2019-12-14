@@ -18,9 +18,10 @@ if (localStorage.token) {
 
 const App = () => {
   useEffect(() => {
-    if (localStorage.token) {
+    //if (localStorage.token) {
+      console.log('load locally saved user');
       store.dispatch(loadLocallySavedUser());
-    }
+    //}
   }, []);
 
   return (

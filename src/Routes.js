@@ -13,9 +13,9 @@ const Routes = props => {
     <Switch>
       <PrivateRoute exact path='/' component={Universes} />
       <Route exact path='/login' component={Login} />
-      <PrivateRoute exact path='/u/:universeId' component={Universe} />
-      <PrivateRoute exact path='/u/:universeId/c/' component={Characters} />
       <PrivateRoute exact path='/u/:universeId/c/:characterId' component={Character} />
+      <PrivateRoute exact path='/u/:universeId/c' component={Characters} />
+      <PrivateRoute exact path='/u/:universeId' component={Universe} />
     </Switch>
   )
 }
