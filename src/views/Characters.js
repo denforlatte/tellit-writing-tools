@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Container, Spinner, ListGroup, ListGroupItem } from 'reactstrap';
 
-import { getCharacters } from '../actions/characterActions';
+import { getCharacters, selectCharacter } from '../actions/characterActions';
 
 const Characters = ({
   characters: { isLoading, majorCharacters, minorCharacters, selectedCharacter },
   getCharacters,
+  selectCharacter,
   user,
   match,
 }) => {
@@ -33,11 +34,11 @@ const Characters = ({
             <ListGroup>
               {majorCharacters &&
                 majorCharacters.map(character => (
-                  <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>
+                  <ListGroupItem onClick={() => selectCharacter(character._id)} style={{cursor: 'pointer'}}>
                     {character.name}
                   </ListGroupItem>
                 ))}
-                <ListGroupItem>Add new major character...</ListGroupItem>
+                <ListGroupItem onClick={() => alert()} style={{cursor: 'pointer'}}>Add new major character...</ListGroupItem>
             </ListGroup>
           )}
       <br />
@@ -51,10 +52,10 @@ const Characters = ({
             <ListGroup>
               {minorCharacters &&
                 minorCharacters.map(character => (
-                  <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>{character.name}
+                  <ListGroupItem onClick={() => selectCharacter(character._id)} style={{cursor: 'pointer'}}>{character.name}
                   </ListGroupItem>
                 ))}
-                <ListGroupItem>Add new minor character...</ListGroupItem>
+                <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>Add new minor character...</ListGroupItem>
             </ListGroup>
           )}
     </Container>
@@ -64,6 +65,7 @@ const Characters = ({
 Characters.propTypes = {
   characters: PropTypes.object.isRequired,
   getCharacters: PropTypes.func.isRequired,
+  selectCharacter: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
@@ -73,4 +75,4 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { getCharacters })(Characters);
+export default connect(mapStateToProps, { getCharacters, selectCharacter })(Characters);

@@ -46,6 +46,7 @@ export const selectUniverse = universeId => async dispatch => {
     });
   } else {
     // TODO redirect to universes and show error modal.
+    console.error('Failed to select universe');
   }
 };
 

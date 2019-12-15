@@ -2,6 +2,8 @@ import {
   CHARACTERS_FETCH_PENDING,
   CHARACTERS_FETCH_SUCCESS,
   CHARACTERS_FETCH_ERROR,
+  CHARACTERS_SELECT_ONE,
+  CHARACTERS_CLEAR_SELECTED,
 } from '../actions/types';
 
 const initialState = {
@@ -40,6 +42,16 @@ const charactersReducer = (state = initialState, action) => {
         majorCharacters: null,
         minorCharacters: null,
       };
+    case CHARACTERS_SELECT_ONE:
+      return {
+        ...state,
+        selectedCharacter: payload
+      }
+    case CHARACTERS_CLEAR_SELECTED:
+      return {
+        ...state,
+        selectedCharacter: null,
+      }
     default:
       return state;
   }

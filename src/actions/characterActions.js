@@ -10,7 +10,7 @@ import {
 } from './types';
 import store from '../store';
 
-export const getCharacters = (universeId) => async dispatch => {
+export const getCharacters = universeId => async dispatch => {
   dispatch({
     type: CHARACTERS_FETCH_PENDING,
   });
@@ -29,10 +29,35 @@ export const getCharacters = (universeId) => async dispatch => {
     dispatch({
       type: CHARACTERS_FETCH_ERROR,
       payload: error,
-    })
+    });
   }
-}
+};
 
 export const selectCharacter = characterId => async dispatch => {
-  // TODO select character
-}
+  const majorCharacters = store.getState().characters.majorCharacters;
+  const minorCharacters = store.getState().characters.minorCharacters;
+
+  let character = majorCharacters.find(
+    character => character._id === characterId
+  );
+  if (!character)
+    character = minorCharacters.find(
+      character => character._id === characterId
+    );
+
+  if (character) {
+    dispatch({
+      type: CHARACTERS_SELECT_ONE,
+      payload: character,
+    });
+  } else {
+    // TODO Redirect and show error?
+    console.error('Failed to select character');
+  }
+};
+
+export const clearSelectedCharacter = () => async dispatch => {
+  dispatch({
+    type: CHARACTERS_CLEAR_SELECTED,
+  });
+};
