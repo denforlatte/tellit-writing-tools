@@ -15,7 +15,7 @@ import {
   getCharacters,
   selectCharacter,
   addNewCharacter,
-} from '../actions/characterActions';
+} from '../../actions/characterActions';
 
 const Characters = ({
   characters: {
@@ -79,8 +79,9 @@ const Characters = ({
                 {character.name}
               </ListGroupItem>
             ))}
-            {isAddingMajorCharacter ? (
-              <ListGroupItem>
+          {isAddingMajorCharacter ? (
+            <ListGroupItem>
+              <div style={{ display: 'flex' }}>
                 <Input
                   type='text'
                   name='major'
@@ -94,14 +95,15 @@ const Characters = ({
                 <Button onClick={() => setIsAddingMajorCharacter(false)}>
                   Cancel
                 </Button>
-              </ListGroupItem>
-            ) : (
-              <ListGroupItem
-                onClick={() => setIsAddingMajorCharacter(true)}
-                style={{ cursor: 'pointer' }}>
-                Add new major character...
-              </ListGroupItem>
-            )}
+              </div>
+            </ListGroupItem>
+          ) : (
+            <ListGroupItem
+              onClick={() => setIsAddingMajorCharacter(true)}
+              style={{ cursor: 'pointer' }}>
+              Add new major character...
+            </ListGroupItem>
+          )}
         </ListGroup>
       )}
       <br />
@@ -123,7 +125,8 @@ const Characters = ({
               </ListGroupItem>
             ))}
           {isAddingMinorCharacter ? (
-              <ListGroupItem>
+            <ListGroupItem>
+              <div style={{ display: 'flex' }}>
                 <Input
                   type='text'
                   name='minor'
@@ -137,20 +140,21 @@ const Characters = ({
                 <Button onClick={() => setIsAddingMinorCharacter(false)}>
                   Cancel
                 </Button>
-              </ListGroupItem>
-            ) : (
-              <ListGroupItem
-                onClick={() => setIsAddingMinorCharacter(true)}
-                style={{ cursor: 'pointer' }}>
-                Add new minor character...
-              </ListGroupItem>
-            )}
+              </div>
+            </ListGroupItem>
+          ) : (
+            <ListGroupItem
+              onClick={() => setIsAddingMinorCharacter(true)}
+              style={{ cursor: 'pointer' }}>
+              Add new minor character...
+            </ListGroupItem>
+          )}
         </ListGroup>
       )}
-      <br/>
-      <br/>
-      <br/>
-      <br/>
+      <br />
+      <br />
+      <br />
+      <br />
     </Container>
   );
 };
