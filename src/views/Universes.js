@@ -10,7 +10,7 @@ import Universe from '../components/Universe';
 const Universes = ({ getUniverses, createUniverse, universes }) => {
   useEffect(() => {
     getUniverses();
-  }, [])
+  }, [getUniverses])
 
   return (
     <Container>

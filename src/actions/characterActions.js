@@ -61,3 +61,28 @@ export const clearSelectedCharacter = () => async dispatch => {
     type: CHARACTERS_CLEAR_SELECTED,
   });
 };
+
+export const addNewCharacter = ({name, importance, universeId}) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify({name, importance});
+
+  try {
+    const res = await axios.post(`/universes/${universeId}/characters`, body, config);
+    
+    dispatch({
+      type: CHARACTERS_ADD_ONE,
+      payload: res.data,
+    })
+  } catch (error) {
+    console.error(error.message);
+    dispatch({
+      type: APP_MODAL_ERROR,
+      payload: error,
+    });
+  }
+}

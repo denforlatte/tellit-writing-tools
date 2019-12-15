@@ -4,6 +4,7 @@ import {
   CHARACTERS_FETCH_ERROR,
   CHARACTERS_SELECT_ONE,
   CHARACTERS_CLEAR_SELECTED,
+  CHARACTERS_ADD_ONE,
 } from '../actions/types';
 
 const initialState = {
@@ -45,13 +46,27 @@ const charactersReducer = (state = initialState, action) => {
     case CHARACTERS_SELECT_ONE:
       return {
         ...state,
-        selectedCharacter: payload
-      }
+        selectedCharacter: payload,
+      };
     case CHARACTERS_CLEAR_SELECTED:
       return {
         ...state,
         selectedCharacter: null,
+      };
+    case CHARACTERS_ADD_ONE:
+      if (payload.importance === 'major') {
+        return {
+          ...state,
+          majorCharacters: [...state.majorCharacters, payload],
+        };
       }
+      if (payload.importance === 'minor') {
+        return {
+          ...state,
+          minorCharacters: [...state.minorCharacters, payload],
+        };
+      }
+      return state;
     default:
       return state;
   }
