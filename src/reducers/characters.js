@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  isLoading: false,
+  isLoading: true,
   majorCharacters: null,
   minorCharacters: null,
   selectedCharacter: null,

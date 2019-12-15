@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Container, Row, ListGroup, ListGroupItem } from 'reactstrap';
+import { Container, Spinner, ListGroup, ListGroupItem } from 'reactstrap';
 
 import { getCharacters } from '../actions/characterActions';
 
@@ -25,28 +25,48 @@ const Characters = ({
   return (
     <Container>
       <h2>Major Characters</h2>
-      <ListGroup>
-        {majorCharacters &&
-          majorCharacters.map(character => (
-            <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>
-              {character.name}
-            </ListGroupItem>
-          ))}
-      </ListGroup>
+          {isLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'center' }} >
+              <Spinner size='lg' color='primary'/>
+            </div>
+          ) : (
+            <ListGroup>
+              {majorCharacters &&
+                majorCharacters.map(character => (
+                  <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>
+                    {character.name}
+                  </ListGroupItem>
+                ))}
+                <ListGroupItem>Add new major character...</ListGroupItem>
+            </ListGroup>
+          )}
       <br />
       <h2>Minor Characters</h2>
-      <ListGroup>
-        {minorCharacters &&
-          minorCharacters.map(character => (
-            <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>{character.name}
-            </ListGroupItem>
-          ))}
-      </ListGroup>
+      
+      {isLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'center' }} >
+              <Spinner size='lg' color='primary'/>
+            </div>
+          ) : (
+            <ListGroup>
+              {minorCharacters &&
+                minorCharacters.map(character => (
+                  <ListGroupItem onClick={() => alert('hi')} style={{cursor: 'pointer'}}>{character.name}
+                  </ListGroupItem>
+                ))}
+                <ListGroupItem>Add new minor character...</ListGroupItem>
+            </ListGroup>
+          )}
     </Container>
   );
 };
 
-Characters.propTypes = {};
+Characters.propTypes = {
+  characters: PropTypes.object.isRequired,
+  getCharacters: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   characters: state.characters,
