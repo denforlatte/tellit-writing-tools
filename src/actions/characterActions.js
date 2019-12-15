@@ -73,13 +73,13 @@ export const addNewCharacter = ({name, importance, universeId}) => async dispatc
 
   try {
     const res = await axios.post(`/universes/${universeId}/characters`, body, config);
-    
+
     dispatch({
       type: CHARACTERS_ADD_ONE,
       payload: res.data,
     })
   } catch (error) {
-    console.error(error.message);
+    console.error('add new char error:', error);
     dispatch({
       type: APP_MODAL_ERROR,
       payload: error,
