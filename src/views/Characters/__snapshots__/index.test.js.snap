@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Characters View renders shows a spinner when fetching characters 1`] = `
+<Container
+  tag="div"
+>
+  <h2>
+    Major Characters
+  </h2>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Spinner
+      color="primary"
+      size="lg"
+      tag="div"
+      type="border"
+    >
+      Loading...
+    </Spinner>
+  </div>
+  <br />
+  <h2>
+    Minor Characters
+  </h2>
+  <div
+    style={
+      Object {
+        "display": "flex",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Spinner
+      color="primary"
+      size="lg"
+      tag="div"
+      type="border"
+    >
+      Loading...
+    </Spinner>
+  </div>
+  <br />
+  <br />
+  <br />
+  <br />
+</Container>
+`;

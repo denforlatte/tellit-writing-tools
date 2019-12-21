@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 
 import { selectUniverse } from '../actions/universeActions';
+import { Link } from 'react-router-dom';
 
 const Universe = ({universe, match, selectUniverse}) => {
   // TODO This doesn't work. Just fetch it. :/
@@ -14,7 +15,8 @@ const Universe = ({universe, match, selectUniverse}) => {
 
   return (
     <div>
-      {universe.name}
+      <h2>{universe.name}</h2>
+      <Link to={`${match.url}/c`}>Characters</Link>
     </div>
   )
 }

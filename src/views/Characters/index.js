@@ -17,7 +17,7 @@ import {
   addNewCharacter,
 } from '../../actions/characterActions';
 
-const Characters = ({
+export const Characters = ({
   characters: {
     isLoading,
     majorCharacters,
