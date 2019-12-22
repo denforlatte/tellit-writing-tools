@@ -7,9 +7,15 @@
 
 .navItemContainer {
   display: flex;
+  justify-content: space-around;
   list-style: none;
 }
 
-.li {
+.navItem {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
   color: white;
 }

@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { li } from './subMenu.module.scss'
+import { navItem } from './subMenu.module.scss'
 
-const SubMenuItem = ({children}) => {
+const SubMenuItem = ({children, onClick}) => {
   return (
-    <div className={li}>
+    <div className={navItem} onClick={onClick}>
       {children}
     </div>
   )
 }
 
 SubMenuItem.propTypes = {
-
+  children: PropTypes.any,
+  onClick: PropTypes.func,
 }
 
 export default SubMenuItem
