@@ -154,7 +154,6 @@ export const Characters = ({
       <br />
       <br />
       <br />
-      <br />
     </Container>
   );
 };

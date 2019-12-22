@@ -1,0 +1,15 @@
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: #007bff;
+}
+
+.navItemContainer {
+  display: flex;
+  list-style: none;
+}
+
+.li {
+  color: white;
+}
