@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import {
   Container,
   Spinner,
@@ -11,9 +10,10 @@ import {
   Button,
 } from 'reactstrap';
 
+import { characterLink } from './characters.module.scss';
+
 import {
   getCharacters,
-  selectCharacter,
   addNewCharacter,
 } from '../../actions/characterActions';
 
@@ -22,10 +22,8 @@ export const Characters = ({
     isLoading,
     majorCharacters,
     minorCharacters,
-    selectedCharacter,
   },
   getCharacters,
-  selectCharacter,
   addNewCharacter,
   user,
   match,
@@ -39,10 +37,6 @@ export const Characters = ({
       getCharacters(match.params.universeId);
     }
   }, [user, match.params.universeId, getCharacters]);
-
-  if (selectedCharacter) {
-    return <Redirect to={`${match.url}/${selectedCharacter._id}`} />;
-  }
 
   const updateNewCharacterOnChange = e => {
     setNewCharacter({
@@ -70,15 +64,15 @@ export const Characters = ({
         </div>
       ) : (
         <ListGroup>
-          {majorCharacters &&
-            majorCharacters.map(character => (
-              <ListGroupItem
-                key={character._id}
-                onClick={() => selectCharacter(character._id)}
-                style={{ cursor: 'pointer' }}>
-                {character.name}
-              </ListGroupItem>
-            ))}
+          {majorCharacters.map(character => (
+            <ListGroupItem
+              key={character._id}
+              className={characterLink}
+              tag='a'
+              href={`${match.url}/${character._id}`}>
+              {character.name}
+            </ListGroupItem>
+          ))}
           {isAddingMajorCharacter ? (
             <ListGroupItem>
               <div style={{ display: 'flex' }}>
@@ -115,15 +109,15 @@ export const Characters = ({
         </div>
       ) : (
         <ListGroup>
-          {minorCharacters &&
-            minorCharacters.map(character => (
-              <ListGroupItem
-                key={character._id}
-                onClick={() => selectCharacter(character._id)}
-                style={{ cursor: 'pointer' }}>
-                {character.name}
-              </ListGroupItem>
-            ))}
+          {minorCharacters.map(character => (
+            <ListGroupItem
+            key={character._id}
+            className={characterLink}
+            tag='a'
+            href={`${match.url}/${character._id}`}>
+            {character.name}
+          </ListGroupItem>
+          ))}
           {isAddingMinorCharacter ? (
             <ListGroupItem>
               <div style={{ display: 'flex' }}>
@@ -161,7 +155,6 @@ export const Characters = ({
 Characters.propTypes = {
   characters: PropTypes.object.isRequired,
   getCharacters: PropTypes.func.isRequired,
-  selectCharacter: PropTypes.func.isRequired,
   addNewCharacter: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
@@ -174,7 +167,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getCharacters,
-  selectCharacter,
   addNewCharacter,
 };
 

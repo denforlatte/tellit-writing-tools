@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { getCharacter } from '../../actions/characterActions';
 
 import SubMenu from '../../components/SubMenu/SubMenu';
 import SubMenuItem from '../../components/SubMenu/SubMenuItem';
@@ -11,13 +14,21 @@ const iconStyle = {
   fontSize: '40px',
 };
 
-const Character = props => {
+const Character = ({character, getCharacter, match}) => {
   const [tab, setTab] = useState('overview');
+
+  const { characterId, universeId } = match.params;
+  useEffect(() => {
+    getCharacter(characterId, universeId);
+  }, [getCharacter, characterId, universeId])
+  
+  
+  // TODO add loading/error state
 
   const getSelectedTab = () => {
     switch (tab) {
       case 'overview':
-        return <Overview />;
+        return <Overview character={character}/>;
       case 'physical':
         return <div>physical</div>;
       case 'mental':
@@ -58,6 +69,13 @@ const Character = props => {
   );
 };
 
-Character.propTypes = {};
+Character.propTypes = {
+  character: PropTypes.object,
+  getCharacter: PropTypes.func.isRequired,
+};
 
-export default Character;
+const mapStateToProps = state => ({
+  character: state.characters.selectedCharacter,
+})
+
+export default connect(mapStateToProps, {getCharacter})(Character);
