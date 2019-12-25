@@ -34,7 +34,7 @@ export const logInUser = ({email, password}) => async dispatch => {
       
       dispatch({
           type: APP_MODAL_ERROR,
-          payload: error,
+          payload: error.response.data,
       })
   }
 };

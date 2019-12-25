@@ -52,7 +52,7 @@ export const getCharacter = (characterId, universeId) => async dispatch => {
     console.error(error.response);
     dispatch({
       type: CHARACTERS_FETCH_ONE_ERROR,
-      payload: error.response,
+      payload: error.response.errors,
     })
   }
 };

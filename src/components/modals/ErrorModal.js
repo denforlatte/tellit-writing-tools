@@ -15,9 +15,11 @@ const ErrorModal = ({ errors }) => {
     <Modal isOpen={true} toggle={toggle}>
       <ModalHeader toggle={toggle}>Computer says no</ModalHeader>
       <ModalBody>
-        {errors.map((error, i) => (
+        {typeof errors === 'array' ? (errors.map((error, i) => (
           <div key={i}>{error}</div>
-        ))}
+        ))) : (
+          <div>{errors}</div>
+        )}
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={toggle}>

@@ -22,7 +22,7 @@ const appManagementReducer = (state = initialState, action) => {
       console.error(payload);
       return {
         ...state,
-        errors: payload.errors
+        errors: payload
       }
     default: 
       return state;
