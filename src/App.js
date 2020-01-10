@@ -11,6 +11,7 @@ import ErrorModal from './components/modals/ErrorModal';
 
 import setAuthHeader from './utils/setAuthHeader';
 import { loadLocallySavedUser } from './actions/userActions';
+import ErrorBoundary from './components/ErrorBoundary';
 
 if (localStorage.token) {
   setAuthHeader(localStorage.token);
@@ -19,19 +20,21 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     //if (localStorage.token) {
-      console.log('load locally saved user');
-      store.dispatch(loadLocallySavedUser());
+    console.log('load locally saved user');
+    store.dispatch(loadLocallySavedUser());
     //}
   }, []);
 
   return (
-    <Provider store={store}>
-      <Router>
-        <MainMenu />
-        <Routes />
-        <ErrorModal />
-      </Router>
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <Router>
+          <MainMenu />
+          <Routes />
+          <ErrorModal />
+        </Router>
+      </Provider>
+    </ErrorBoundary>
   );
 };
 
