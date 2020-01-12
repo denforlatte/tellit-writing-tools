@@ -19,7 +19,7 @@ const appManagementReducer = (state = initialState, action) => {
     case UNIVERSES_FETCH_ERROR:
     case CHARACTERS_FETCH_ERROR:
     case CHARACTERS_FETCH_ONE_ERROR:
-      console.error(payload);
+      console.error(type + ' error: ' + payload);
       return {
         ...state,
         errors: payload
