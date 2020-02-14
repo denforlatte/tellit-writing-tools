@@ -7,7 +7,6 @@ export default class ErrorBoundary extends Component {
 
     this.state = {
       hasError: false,
-      errorMessage: null,
     }
   }
 
@@ -24,12 +23,17 @@ export default class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return (
+      return this.props.fallbackUI ? (
+        this.props.fallbackUI
+      ) : (
         <FatalErrorModal/>
-      )
+      );
     }
-
     return this.props.children;
   }
 }
 
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+  fallbackUI: PropTypes.node,
+};
