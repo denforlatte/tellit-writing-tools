@@ -2,16 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 
-import { selectUniverse } from '../actions/universeActions';
+import { getUniverse } from '../actions/universeActions';
 import { Link } from 'react-router-dom';
 
-const Universe = ({universe, match, selectUniverse}) => {
-  // TODO This doesn't work. Just fetch it. :/
-  if (!universe || universe.id !== match.params.universeId) {
-    console.log('Set correct universe');
-    selectUniverse(match.params.universeId);
-    // TODO Bug fix: breaks if universe is not in store
-  }
+const Universe = ({universe, match, getUniverse}) => {
+  useEffect(() => {
+    getUniverse(match.params.universeId)
+  }, [getUniverse]);
 
   return (
     <div>
@@ -24,11 +21,11 @@ const Universe = ({universe, match, selectUniverse}) => {
 Universe.propTypes = {
   universe: PropTypes.any,
   match: PropTypes.object.isRequired,
-  selectUniverse: PropTypes.func.isRequired,
+  getUniverse: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-  universe: state.universes.selectedUniverse,
+  universe: state.universes.universe,
 })
 
-export default connect(mapStateToProps, { selectUniverse })(Universe);
+export default connect(mapStateToProps, { getUniverse })(Universe);

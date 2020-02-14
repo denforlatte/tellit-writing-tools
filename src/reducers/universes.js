@@ -2,15 +2,17 @@ import {
   UNIVERSES_FETCH_PENDING,
   UNIVERSES_FETCH_SUCCESS,
   UNIVERSES_FETCH_ERROR,
-  UNIVERSES_SELECT_ONE,
-  UNIVERSES_CLEAR_SELECTED,
   UNIVERSES_ADD_ONE,
+  UNIVERSES_FETCH_ONE_PENDING,
+  USER_LOG_OUT,
+  UNIVERSES_FETCH_ONE_SUCCESS,
+  UNIVERSES_FETCH_ONE_ERROR,
 } from '../actions/types';
 
 const initialState = {
   isLoading: false,
   universes: [],
-  selectedUniverse: false,
+  universe: null,
 };
 
 const universesReducer = (state = initialState, action) => {
@@ -22,7 +24,6 @@ const universesReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         universes: null,
-        selectedUniverse: false,
       };
     case UNIVERSES_FETCH_SUCCESS:
       return {
@@ -35,23 +36,30 @@ const universesReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
       };
-    case UNIVERSES_SELECT_ONE:
+    case UNIVERSES_FETCH_ONE_PENDING:
       return {
         ...state,
-        selectedUniverse: state.universes.find(
-          universe => universe._id === payload
-        ),
+        isLoading: true,
+        universe: null,
       };
-    case UNIVERSES_CLEAR_SELECTED:
+    case UNIVERSES_FETCH_ONE_SUCCESS:
       return {
         ...state,
-        selectedUniverse: false,
+        isLoading: false,
+        universe: payload,
+      };
+    case UNIVERSES_FETCH_ONE_ERROR:
+      return {
+        ...state,
+        isLoading: false,
       };
     case UNIVERSES_ADD_ONE:
       return {
         ...state,
         universes: [...state.universes, payload],
       };
+    case USER_LOG_OUT:
+      return {};
     default:
       return state;
   }

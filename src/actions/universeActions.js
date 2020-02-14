@@ -3,12 +3,12 @@ import {
   UNIVERSES_FETCH_PENDING,
   UNIVERSES_FETCH_SUCCESS,
   UNIVERSES_FETCH_ERROR,
-  UNIVERSES_SELECT_ONE,
-  UNIVERSES_CLEAR_SELECTED,
   UNIVERSES_ADD_ONE,
   APP_MODAL_ERROR,
+  UNIVERSES_FETCH_ONE_PENDING,
+  UNIVERSES_FETCH_ONE_SUCCESS,
+  UNIVERSES_FETCH_ONE_ERROR,
 } from './types';
-import store from '../store';
 
 export const getUniverses = () => async dispatch => {
   dispatch({
@@ -37,29 +37,26 @@ export const getUniverses = () => async dispatch => {
   }
 };
 
-// TODO: remove this sill idea. :p 
-// export const selectUniverse = universeId => async dispatch => {
-//   // TODO fetch all universes when user logs in
+export const getUniverse = (universeId) => async dispatch => {
+  dispatch({
+    type: UNIVERSES_FETCH_ONE_PENDING,
+  });
 
-//   // TODO: check universe is in store or show error
-//   const universeIds = store.getState().universes.universes.map(x => x._id);
+  try {
+    const res = await axios.get(`/universes/${universeId}`);
 
-//   if (universeIds.includes(universeId)) {
-//     dispatch({
-//       type: UNIVERSES_SELECT_ONE,
-//       payload: universeId,
-//     });
-//   } else {
-//     // TODO redirect to universes and show error modal.
-//     console.error('Failed to select universe');
-//   }
-// };
-
-// export const clearSelectedUniverse = () => async dispatch => {
-//   dispatch({
-//     type: UNIVERSES_CLEAR_SELECTED,
-//   });
-// };
+    dispatch({
+      type: UNIVERSES_FETCH_ONE_SUCCESS,
+      payload: res.data,
+    });
+  } catch (error) {
+    const payload = error.response.data ? error.response.data.errors : [error.message];
+    dispatch({
+      type: UNIVERSES_FETCH_ONE_ERROR,
+      payload,
+    });
+  }
+}
 
 export const createUniverse = ({ name }) => async dispatch => {
   const config = {

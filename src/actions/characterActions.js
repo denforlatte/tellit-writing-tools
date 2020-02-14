@@ -55,17 +55,11 @@ export const getCharacter = (characterId, universeId) => async dispatch => {
           payload: res.data,
         });
   } catch (error) {
-    if (error.response.data) {
-      dispatch({
-        type: CHARACTERS_FETCH_ONE_ERROR,
-        payload: error.response.data.errors,
-      })
-    } else {
-      dispatch({
-        type: CHARACTERS_FETCH_ONE_ERROR,
-        payload: [error.message],
-      })
-    }
+    const payload = error.response.data ? error.response.data.errors : [error.message];
+    dispatch({
+      type: CHARACTERS_FETCH_ONE_ERROR,
+      payload,
+    });
   }
 };
 
