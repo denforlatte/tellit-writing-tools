@@ -23,11 +23,17 @@ export const getCharacters = universeId => async dispatch => {
       payload: res.data,
     });
   } catch (error) {
-    console.error(error.response);
-    dispatch({
-      type: CHARACTERS_FETCH_ERROR,
-      payload: error.response,
-    });
+    if (error.response.data) {
+      dispatch({
+        type: CHARACTERS_FETCH_ERROR,
+        payload: error.response.data.errors,
+      })
+    } else {
+      dispatch({
+        type: CHARACTERS_FETCH_ERROR,
+        payload: [error.message],
+      })
+    }
   }
 };
 
@@ -49,11 +55,17 @@ export const getCharacter = (characterId, universeId) => async dispatch => {
           payload: res.data,
         });
   } catch (error) {
-    console.error(error.response);
-    dispatch({
-      type: CHARACTERS_FETCH_ONE_ERROR,
-      payload: error.response.errors,
-    })
+    if (error.response.data) {
+      dispatch({
+        type: CHARACTERS_FETCH_ONE_ERROR,
+        payload: error.response.data.errors,
+      })
+    } else {
+      dispatch({
+        type: CHARACTERS_FETCH_ONE_ERROR,
+        payload: [error.message],
+      })
+    }
   }
 };
 
@@ -82,10 +94,9 @@ export const addNewCharacter = ({
       payload: res.data,
     });
   } catch (error) {
-    console.error('add new char error:', error);
     dispatch({
       type: APP_MODAL_ERROR,
-      payload: error,
+      payload: [error],
     });
   }
 };

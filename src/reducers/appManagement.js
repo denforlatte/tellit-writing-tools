@@ -4,10 +4,11 @@ import {
   UNIVERSES_FETCH_ERROR,
   CHARACTERS_FETCH_ERROR,
   CHARACTERS_FETCH_ONE_ERROR,
+  APP_CLEAR_ERRORS,
 } from '../actions/types';
 
 const initialState = {
-  errors: null,
+  errors: [],
 };
 
 const appManagementReducer = (state = initialState, action) => {
@@ -19,10 +20,16 @@ const appManagementReducer = (state = initialState, action) => {
     case UNIVERSES_FETCH_ERROR:
     case CHARACTERS_FETCH_ERROR:
     case CHARACTERS_FETCH_ONE_ERROR:
-      console.error(type + ' error: ' + payload);
+      console.error(type + ' error: ');
+      console.error(payload);
       return {
         ...state,
         errors: payload
+      }
+    case APP_CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: [],
       }
     default: 
       return state;

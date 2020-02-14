@@ -6,6 +6,7 @@ export const USER_LOG_OUT = 'USER_LOG_OUT';
 
 // App Management
 export const APP_MODAL_ERROR = 'APP_MODAL_ERROR';
+export const APP_CLEAR_ERRORS = 'APP_CLEAR_ERRORS';
 
 // Universe Actions
 export const UNIVERSES_FETCH_PENDING = 'UNIVERSES_FETCH_PENDING';

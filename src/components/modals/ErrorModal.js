@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { clearAppErrors } from '../../actions/appManagementActions';
 
-const ErrorModal = ({ errors }) => {
+const ErrorModal = ({ errors, clearAppErrors }) => {
   if (!errors || errors.length <= 0) {
     return null;
   }
 
-  // TODO close modal
-  const toggle = () => console.log('toggle');
+  const toggle = () => clearAppErrors();
 
+  // TODO make this look prettier
   return (
     <Modal isOpen={true} toggle={toggle}>
       <ModalHeader toggle={toggle}>Computer says no</ModalHeader>
@@ -32,10 +33,11 @@ const ErrorModal = ({ errors }) => {
 
 ErrorModal.propTypes = {
   errors: PropTypes.array,
+  clearAppErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   errors: state.appManagement.errors,
 });
 
-export default connect(mapStateToProps)(ErrorModal);
+export default connect(mapStateToProps, { clearAppErrors })(ErrorModal);

@@ -26,16 +26,19 @@ export const logInUser = ({email, password}) => async dispatch => {
           type: USER_LOG_IN_SUCCESS,
           payload: res.data
       })
-  } catch (error) {
-      // const errors = error.response.data.errors;
-      console.error(error.message);
-
-      // TODO Create a standard error flow
+  } catch (error) {     
+      if(error.response.data) {
+        dispatch({
+            type: APP_MODAL_ERROR,
+            payload: error.response.data.errors,
+        });
+      } else {
+          dispatch({
+              type: APP_MODAL_ERROR,
+              payload: [error.message],
+          });
+        }
       
-      dispatch({
-          type: APP_MODAL_ERROR,
-          payload: error.response.data,
-      })
   }
 };
 
@@ -64,13 +67,21 @@ export const loadLocallySavedUser = () => async dispatch => {
           payload: res.data
       })
   } catch (error) {
-      console.error(error.message);
-      dispatch({
-          type: USER_LOG_IN_ERROR,
-      })
+      if (error.response.data) {
+          dispatch({
+              type: USER_LOG_IN_ERROR,
+              payload: error.response.data.errors,
+          });
+      } else {
+          dispatch({
+              type: USER_LOG_IN_ERROR,
+              payload: [error.message],
+          });
+      }
   }
 };
 
+// TODO add log out functionality
 // export const logout = () => dispatch => {
 //   dispatch({
 //       type: CLEAR_PROFILE

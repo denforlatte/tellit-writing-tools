@@ -23,38 +23,43 @@ export const getUniverses = () => async dispatch => {
       payload: res.data,
     });
   } catch (error) {
-    // TODO Error modal
-    console.error(error.message);
-
-    dispatch({
-      type: UNIVERSES_FETCH_ERROR,
-      payload: error,
-    });
+    if (error.response.data) {
+      dispatch({
+        type: UNIVERSES_FETCH_ERROR,
+        payload: error.response.data.errors,
+      });
+    } else {
+      dispatch({
+        type: UNIVERSES_FETCH_ERROR,
+        payload: [error.message],
+      });
+    }
   }
 };
 
-export const selectUniverse = universeId => async dispatch => {
-  // TODO fetch all universes when user logs in
+// TODO: remove this sill idea. :p 
+// export const selectUniverse = universeId => async dispatch => {
+//   // TODO fetch all universes when user logs in
 
-  // TODO: check universe is in store or show error
-  const universeIds = store.getState().universes.universes.map(x => x._id);
+//   // TODO: check universe is in store or show error
+//   const universeIds = store.getState().universes.universes.map(x => x._id);
 
-  if (universeIds.includes(universeId)) {
-    dispatch({
-      type: UNIVERSES_SELECT_ONE,
-      payload: universeId,
-    });
-  } else {
-    // TODO redirect to universes and show error modal.
-    console.error('Failed to select universe');
-  }
-};
+//   if (universeIds.includes(universeId)) {
+//     dispatch({
+//       type: UNIVERSES_SELECT_ONE,
+//       payload: universeId,
+//     });
+//   } else {
+//     // TODO redirect to universes and show error modal.
+//     console.error('Failed to select universe');
+//   }
+// };
 
-export const clearSelectedUniverse = () => async dispatch => {
-  dispatch({
-    type: UNIVERSES_CLEAR_SELECTED,
-  });
-};
+// export const clearSelectedUniverse = () => async dispatch => {
+//   dispatch({
+//     type: UNIVERSES_CLEAR_SELECTED,
+//   });
+// };
 
 export const createUniverse = ({ name }) => async dispatch => {
   const config = {
@@ -73,12 +78,16 @@ export const createUniverse = ({ name }) => async dispatch => {
       payload: res.data,
     });
   } catch (error) {
-    console.error(error.message);
-
-    // TODO error modal
-    dispatch({
-      type: APP_MODAL_ERROR,
-      payload: error,
-    });
+    if (error.response.data) {
+      dispatch({
+        type: APP_MODAL_ERROR,
+        payload: error.response.data.errors,
+      });
+    } else {
+      dispatch({
+        type: APP_MODAL_ERROR,
+        payload: [error.message],
+      })
+    }
   }
 };
