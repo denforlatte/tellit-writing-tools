@@ -6,7 +6,7 @@ import Login from './views/Login';
 import Universes from './views/Universes';
 import Universe from './views/Universe';
 import Characters from './views/Characters';
-import Character from './views/Character';
+import Character from './views/Character/CharacterView';
 
 const Routes = props => {
   return (

@@ -16,7 +16,7 @@ const ErrorModal = ({ errors, clearAppErrors }) => {
     <Modal isOpen={true} toggle={toggle}>
       <ModalHeader toggle={toggle}>Computer says no</ModalHeader>
       <ModalBody>
-        {typeof errors === 'array' ? (errors.map((error, i) => (
+        {Array.isArray(errors) ? (errors.map((error, i) => (
           <div key={i}>{error}</div>
         ))) : (
           <div>{errors}</div>

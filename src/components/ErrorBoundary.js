@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import FatalErrorModal from './modals/FatalErrorModal';
 
 export default class ErrorBoundary extends Component {
