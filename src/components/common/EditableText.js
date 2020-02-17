@@ -8,8 +8,10 @@ const EditableText = ({ entryName, text, onChange, lineCount = 1 }) => {
   const inputHeight = 1 + lineCount * lineHeight + 'rem';
 
   if (!isEditing) {
+    // TODO Remove on click
     return <p onClick={() => setIsEditing(true)}>{text}</p>;
   } else {
+    // TODO make onBlur save and not end editing.
     return (
       <Input
         onBlur={() => setIsEditing(false)}

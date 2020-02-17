@@ -5,9 +5,12 @@ import {
   CHARACTERS_FETCH_ERROR,
   CHARACTERS_FETCH_ONE_ERROR,
   APP_CLEAR_ERRORS,
+  APP_ENABLE_EDITING,
+  APP_DISABLE_EDITING,
 } from '../actions/types';
 
 const initialState = {
+  isEditing: false,
   errors: [],
 };
 
@@ -30,6 +33,16 @@ const appManagementReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: [],
+      }
+    case APP_ENABLE_EDITING:
+      return {
+        ...state,
+        isEditing: true,
+      }
+    case APP_DISABLE_EDITING: 
+      return {
+        ...state,
+        isEditing: false,
       }
     default: 
       return state;

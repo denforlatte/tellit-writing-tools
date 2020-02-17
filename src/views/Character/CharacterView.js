@@ -23,6 +23,12 @@ const Character = ({ isLoading, character, getCharacter, match }) => {
     getCharacter(characterId, universeId);
   }, [getCharacter, characterId, universeId]);
 
+  useEffect(() => {
+    return () => alert('hi!');
+  },[])
+
+  // TODO add character state and function to save
+
   if (isLoading)
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
