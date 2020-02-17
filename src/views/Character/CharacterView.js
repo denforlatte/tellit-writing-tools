@@ -9,26 +9,31 @@ import SubMenuItem from '../../components/SubMenu/SubMenuItem';
 
 // Character tabs
 import Overview from '../../components/characterTabs/Overview';
+import { Spinner } from 'reactstrap';
 
 const iconStyle = {
   fontSize: '40px',
 };
 
-const Character = ({character, getCharacter, match}) => {
+const Character = ({ isLoading, character, getCharacter, match }) => {
   const [tab, setTab] = useState('overview');
 
   const { characterId, universeId } = match.params;
   useEffect(() => {
     getCharacter(characterId, universeId);
-  }, [getCharacter, characterId, universeId])
-  
-  
-  // TODO add loading/error state
+  }, [getCharacter, characterId, universeId]);
+
+  if (isLoading)
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Spinner size='lg' color='primary' />
+      </div>
+    );
 
   const getSelectedTab = () => {
     switch (tab) {
       case 'overview':
-        return <Overview character={character}/>;
+        return <Overview character={character} />;
       case 'physical':
         return <div>physical</div>;
       case 'mental':
@@ -38,7 +43,7 @@ const Character = ({character, getCharacter, match}) => {
       case 'questions':
         return <div>questions</div>;
       default:
-        return <div>No tab selected</div>
+        return <div>No tab selected</div>;
     }
   };
 
@@ -70,12 +75,14 @@ const Character = ({character, getCharacter, match}) => {
 };
 
 Character.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   character: PropTypes.object,
   getCharacter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
+  isLoading: state.characters.isLoading,
   character: state.characters.selectedCharacter,
-})
+});
 
-export default connect(mapStateToProps, {getCharacter})(Character);
+export default connect(mapStateToProps, { getCharacter })(Character);

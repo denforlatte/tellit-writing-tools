@@ -53,6 +53,7 @@ const charactersReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedCharacter: payload,
+        isLoading: false,
       };
     case CHARACTERS_FETCH_ONE_ERROR:
       return {
