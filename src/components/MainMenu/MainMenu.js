@@ -2,54 +2,95 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {
-  Button,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-} from 'reactstrap';
+import { Button, Collapse, Navbar, NavbarToggler } from 'reactstrap';
 import './mainMenu.scss';
+
 import NoUserMenu from './NoUserMenu';
 import UserNoUniverse from './UserNoUniverse';
 import FullMenu from './FullMenu';
 
-const MainMenu = ({user, universe}) => {
+import {
+  enableEditing,
+  disableEditing,
+} from '../../actions/appManagementActions';
+import { logout } from '../../actions/userActions';
+
+const MainMenu = ({
+  user,
+  universe,
+  isEditing,
+  logout,
+  enableEditing,
+  disableEditing,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(!isOpen);
 
-  const menuContent = () => {
-    if(user && universe) {
-      return FullMenu;
-    } else if (user && !universe) {
-      return UserNoUniverse;
+  const toggleEdit = () => {
+    if (!isEditing) {
+      enableEditing();
     } else {
-      return NoUserMenu;
+      disableEditing();
     }
+    toggleMenu();
   };
 
+  const handleLogout = () => {
+    toggleMenu();
+    logout();
+  };
+
+  let menuContent;
+  if (user && universe) {
+    menuContent = (
+      <FullMenu
+        toggleMenu={toggleMenu}
+        logout={handleLogout}
+        universe={universe}
+      />
+    );
+  } else if (user && !universe) {
+    menuContent = <UserNoUniverse toggleMenu={toggleMenu} logout={logout} />;
+  } else {
+    menuContent = <NoUserMenu toggleMenu={toggleMenu} />;
+  }
+
   return (
-    <Navbar color='primary' light>
-      <NavbarToggler onClick={toggle} />
-      <Link to='/'>
-        <h1>Tellit</h1>
-      </Link>
-      <Button>Edit</Button>
-      <Collapse isOpen={isOpen} navbar>
-        {menuContent()}
-      </Collapse>
-    </Navbar>
+    <>
+      <Navbar color='primary' light fixed={'top'}>
+        <NavbarToggler onClick={toggleMenu} />
+        <Link to='/' onClick={toggleMenu}>
+          <h1>Tellit</h1>
+        </Link>
+        <Button onClick={toggleEdit}>Edit</Button>
+        <Collapse isOpen={isOpen} navbar>
+          <hr />
+          {menuContent}
+        </Collapse>
+      </Navbar>
+      <div style={{ height: '80px', width: '100%' }} />
+    </>
   );
 };
 
 MainMenu.propTypes = {
   user: PropTypes.bool.isRequired,
   universe: PropTypes.object,
-}
+  isEditing: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
+  enableEditing: PropTypes.func.isRequired,
+  disableEditing: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   user: state.user.isAuthenticated,
   universe: state.universes.universe,
-})
+  isEditing: state.appManagement.isEditing,
+});
 
-export default connect(mapStateToProps)(MainMenu);
+export default connect(mapStateToProps, {
+  logout,
+  enableEditing,
+  disableEditing,
+})(MainMenu);
