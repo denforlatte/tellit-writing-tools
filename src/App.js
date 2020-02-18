@@ -5,7 +5,7 @@ import store from './store';
 
 import './App.css';
 
-import MainMenu from './components/MainMenu/';
+import MainMenu from './components/MainMenu/MainMenu';
 import Routes from './Routes';
 import ErrorModal from './components/modals/ErrorModal';
 
