@@ -48,6 +48,5 @@ exports[`Characters View renders shows a spinner when fetching characters 1`] = 
   <br />
   <br />
   <br />
-  <br />
 </Container>
 `;

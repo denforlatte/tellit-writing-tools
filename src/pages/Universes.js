@@ -5,7 +5,7 @@ import { Container, Col, Row, Card, CardTitle } from 'reactstrap';
 
 import { getUniverses, createUniverse } from '../actions/universeActions';
 
-import Universe from '../components/Universe';
+import Universe from '../components/Universe/Universe';
 
 const Universes = ({ getUniverses, createUniverse, universes }) => {
   useEffect(() => {

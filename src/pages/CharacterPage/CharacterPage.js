@@ -15,7 +15,7 @@ const iconStyle = {
   fontSize: '40px',
 };
 
-const Character = ({ isLoading, character, getCharacter, match }) => {
+const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
   const [tab, setTab] = useState('overview');
 
   const { characterId, universeId } = match.params;
@@ -80,7 +80,7 @@ const Character = ({ isLoading, character, getCharacter, match }) => {
   );
 };
 
-Character.propTypes = {
+CharacterPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   character: PropTypes.object,
   getCharacter: PropTypes.func.isRequired,
@@ -91,4 +91,4 @@ const mapStateToProps = state => ({
   character: state.characters.selectedCharacter,
 });
 
-export default connect(mapStateToProps, { getCharacter })(Character);
+export default connect(mapStateToProps, { getCharacter })(CharacterPage);

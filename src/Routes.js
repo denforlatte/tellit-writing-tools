@@ -5,8 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 import Login from './views/Login';
 import Universes from './views/Universes';
 import Universe from './views/Universe';
-import Characters from './views/Characters';
-import Character from './views/Character/CharacterView';
+import Characters from './views/CharactersPage/CharactersPage';
+import Character from './views/CharacterPage/CharacterPage';
 
 const Routes = props => {
   return (

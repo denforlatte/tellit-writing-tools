@@ -17,7 +17,7 @@ import {
   addNewCharacter,
 } from '../../actions/characterActions';
 
-export const Characters = ({
+export const CharactersPage = ({
   characters: {
     isLoading,
     majorCharacters,
@@ -152,7 +152,7 @@ export const Characters = ({
   );
 };
 
-Characters.propTypes = {
+CharactersPage.propTypes = {
   characters: PropTypes.object.isRequired,
   getCharacters: PropTypes.func.isRequired,
   addNewCharacter: PropTypes.func.isRequired,
@@ -170,4 +170,4 @@ const mapDispatchToProps = {
   addNewCharacter,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Characters);
+export default connect(mapStateToProps, mapDispatchToProps)(CharactersPage);

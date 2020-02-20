@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Spinner, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/LoginForm/LoginForm';
 
 const Login = ({ isLoading, isAuthenticated }) => {
   if (isAuthenticated) {
