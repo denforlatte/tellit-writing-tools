@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { getCharacter } from '../../actions/characterActions';
 
+import MainMenu from '../../components/MainMenu/MainMenu';
 import SubMenu from '../../components/SubMenu/SubMenu';
 import SubMenuItem from '../../components/SubMenu/SubMenuItem';
 
@@ -25,14 +26,14 @@ const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
 
   useEffect(() => {
     return () => alert('hi!');
-  },[])
+  }, []);
 
   // TODO add character state and function to save
 
   if (isLoading)
     return (
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Spinner size='lg' color='primary' />
+        <Spinner size="lg" color="primary" />
       </div>
     );
 
@@ -56,27 +57,32 @@ const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
   const currentTab = getSelectedTab();
 
   return (
-    <div>
-      Character
-      {currentTab}
-      <SubMenu>
-        <SubMenuItem onClick={() => setTab('overview')}>
-          <i className='fas fa-user' style={iconStyle}></i>
-        </SubMenuItem>
-        <SubMenuItem onClick={() => setTab('physical')}>
-          <i className='fas fa-eye' style={iconStyle}></i>
-        </SubMenuItem>
-        <SubMenuItem onClick={() => setTab('mental')}>
-          <i className='fas fa-brain' style={iconStyle}></i>
-        </SubMenuItem>
-        <SubMenuItem onClick={() => setTab('communication')}>
-          <i className='fas fa-comment' style={iconStyle}></i>
-        </SubMenuItem>
-        <SubMenuItem onClick={() => setTab('questions')}>
-          <i className='fas fa-question-circle' style={iconStyle}></i>
-        </SubMenuItem>
-      </SubMenu>
-    </div>
+    <>
+      <MainMenu editable />
+      <main>
+        <div>
+          Character
+          {currentTab}
+          <SubMenu>
+            <SubMenuItem onClick={() => setTab('overview')}>
+              <i className="fas fa-user" style={iconStyle}></i>
+            </SubMenuItem>
+            <SubMenuItem onClick={() => setTab('physical')}>
+              <i className="fas fa-eye" style={iconStyle}></i>
+            </SubMenuItem>
+            <SubMenuItem onClick={() => setTab('mental')}>
+              <i className="fas fa-brain" style={iconStyle}></i>
+            </SubMenuItem>
+            <SubMenuItem onClick={() => setTab('communication')}>
+              <i className="fas fa-comment" style={iconStyle}></i>
+            </SubMenuItem>
+            <SubMenuItem onClick={() => setTab('questions')}>
+              <i className="fas fa-question-circle" style={iconStyle}></i>
+            </SubMenuItem>
+          </SubMenu>
+        </div>
+      </main>
+    </>
   );
 };
 

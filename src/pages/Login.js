@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Spinner, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 
+import MainMenu from '../components/MainMenu/MainMenu';
 import LoginForm from '../components/LoginForm/LoginForm';
 
 const Login = ({ isLoading, isAuthenticated }) => {
@@ -12,6 +13,9 @@ const Login = ({ isLoading, isAuthenticated }) => {
   }
 
   return (
+    <>
+    <MainMenu />
+    <main>
     <Container>
       <br />
       <Row>
@@ -41,6 +45,8 @@ const Login = ({ isLoading, isAuthenticated }) => {
         </Col>
       </Row>
     </Container>
+    </main>
+    </>
   );
 };
 

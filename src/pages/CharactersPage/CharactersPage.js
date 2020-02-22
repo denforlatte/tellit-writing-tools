@@ -12,17 +12,12 @@ import {
 
 import { characterLink } from './characters.module.scss';
 
-import {
-  getCharacters,
-  addNewCharacter,
-} from '../../actions/characterActions';
+import { getCharacters, addNewCharacter } from '../../actions/characterActions';
+
+import MainMenu from '../components/MainMenu/MainMenu';
 
 export const CharactersPage = ({
-  characters: {
-    isLoading,
-    majorCharacters,
-    minorCharacters,
-  },
+  characters: { isLoading, majorCharacters, minorCharacters },
   getCharacters,
   addNewCharacter,
   user,
@@ -56,99 +51,114 @@ export const CharactersPage = ({
   };
 
   return (
-    <Container>
-      <h2>Major Characters</h2>
-      {isLoading ? (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Spinner size='lg' color='primary' />
-        </div>
-      ) : (
-        <ListGroup>
-          {majorCharacters.map(character => (
-            <ListGroupItem
-              key={character._id}
-              className={characterLink}
-              tag='a'
-              href={`${match.url}/${character._id}`}>
-              {character.name}
-            </ListGroupItem>
-          ))}
-          {isAddingMajorCharacter ? (
-            <ListGroupItem>
-              <div style={{ display: 'flex' }}>
-                <Input
-                  type='text'
-                  name='major'
-                  id='majorCharacterName'
-                  placeholder='Add a name'
-                  onChange={e => updateNewCharacterOnChange(e)}
-                />
-                <Button color='primary' onClick={() => addCharacterOnSubmit()}>
-                  Add
-                </Button>
-                <Button onClick={() => setIsAddingMajorCharacter(false)}>
-                  Cancel
-                </Button>
-              </div>
-            </ListGroupItem>
+    <>
+      <MainMenu />
+      <main>
+        <Container>
+          <h2>Major Characters</h2>
+          {isLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Spinner size="lg" color="primary" />
+            </div>
           ) : (
-            <ListGroupItem
-              onClick={() => setIsAddingMajorCharacter(true)}
-              style={{ cursor: 'pointer' }}>
-              Add new major character...
-            </ListGroupItem>
+            <ListGroup>
+              {majorCharacters.map(character => (
+                <ListGroupItem
+                  key={character._id}
+                  className={characterLink}
+                  tag="a"
+                  href={`${match.url}/${character._id}`}
+                >
+                  {character.name}
+                </ListGroupItem>
+              ))}
+              {isAddingMajorCharacter ? (
+                <ListGroupItem>
+                  <div style={{ display: 'flex' }}>
+                    <Input
+                      type="text"
+                      name="major"
+                      id="majorCharacterName"
+                      placeholder="Add a name"
+                      onChange={e => updateNewCharacterOnChange(e)}
+                    />
+                    <Button
+                      color="primary"
+                      onClick={() => addCharacterOnSubmit()}
+                    >
+                      Add
+                    </Button>
+                    <Button onClick={() => setIsAddingMajorCharacter(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                </ListGroupItem>
+              ) : (
+                <ListGroupItem
+                  onClick={() => setIsAddingMajorCharacter(true)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Add new major character...
+                </ListGroupItem>
+              )}
+            </ListGroup>
           )}
-        </ListGroup>
-      )}
-      <br />
-      <h2>Minor Characters</h2>
+          <br />
+          <h2>Minor Characters</h2>
 
-      {isLoading ? (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Spinner size='lg' color='primary' />
-        </div>
-      ) : (
-        <ListGroup>
-          {minorCharacters.map(character => (
-            <ListGroupItem
-            key={character._id}
-            className={characterLink}
-            tag='a'
-            href={`${match.url}/${character._id}`}>
-            {character.name}
-          </ListGroupItem>
-          ))}
-          {isAddingMinorCharacter ? (
-            <ListGroupItem>
-              <div style={{ display: 'flex' }}>
-                <Input
-                  type='text'
-                  name='minor'
-                  id='minorCharacterName'
-                  placeholder='Add a name'
-                  onChange={e => updateNewCharacterOnChange(e)}
-                />
-                <Button color='primary' onClick={() => addCharacterOnSubmit()}>
-                  Add
-                </Button>
-                <Button onClick={() => setIsAddingMinorCharacter(false)}>
-                  Cancel
-                </Button>
-              </div>
-            </ListGroupItem>
+          {isLoading ? (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Spinner size="lg" color="primary" />
+            </div>
           ) : (
-            <ListGroupItem
-              onClick={() => setIsAddingMinorCharacter(true)}
-              style={{ cursor: 'pointer' }}>
-              Add new minor character...
-            </ListGroupItem>
+            <ListGroup>
+              {minorCharacters.map(character => (
+                <ListGroupItem
+                  key={character._id}
+                  className={characterLink}
+                  tag="a"
+                  href={`${match.url}/${character._id}`}
+                >
+                  {character.name}
+                </ListGroupItem>
+              ))}
+              {isAddingMinorCharacter ? (
+                <ListGroupItem>
+                  <div style={{ display: 'flex' }}>
+                    <Input
+                      type="text"
+                      name="minor"
+                      id="minorCharacterName"
+                      placeholder="Add a name"
+                      onChange={e => updateNewCharacterOnChange(e)}
+                    />
+                    <Button
+                      color="primary"
+                      onClick={() => addCharacterOnSubmit()}
+                    >
+                      Add
+                    </Button>
+                    <Button onClick={() => setIsAddingMinorCharacter(false)}>
+                      Cancel
+                    </Button>
+                  </div>
+                </ListGroupItem>
+              ) : (
+                <ListGroupItem
+                  onClick={() => setIsAddingMinorCharacter(true)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  Add new minor character...
+                </ListGroupItem>
+              )}
+            </ListGroup>
           )}
-        </ListGroup>
-      )}
-      <br />
-      <br />
-      <br />
-    </Container>
+          <br />
+          <br />
+          <br />
+        </Container>
+      </main>
+    </>
   );
 };
 

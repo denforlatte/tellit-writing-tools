@@ -5,7 +5,6 @@ import store from './store';
 
 import './App.css';
 
-import MainMenu from './components/MainMenu/MainMenu';
 import Routes from './Routes';
 import ErrorModal from './components/modals/ErrorModal';
 
@@ -20,7 +19,6 @@ if (localStorage.token) {
 const App = () => {
   useEffect(() => {
     if (localStorage.token) {
-    console.log('load locally saved user');
     store.dispatch(loadLocallySavedUser());
     } else {
       store.dispatch(logout());
@@ -31,7 +29,6 @@ const App = () => {
     <ErrorBoundary>
       <Provider store={store}>
         <Router>
-          <MainMenu />
           <Routes />
           <ErrorModal />
         </Router>
