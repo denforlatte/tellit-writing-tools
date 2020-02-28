@@ -9,7 +9,7 @@ jobs:
   build:
     name: Check Tellit builds successfully
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 5
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js
