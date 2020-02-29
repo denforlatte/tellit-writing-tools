@@ -6,26 +6,8 @@ on:
     - develop
 
 jobs:
-  build:
-    name: Check Tellit builds successfully
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12.x
-    - name: install dependencies
-      run: |
-        npm install
-    - name: run build
-      run: |
-        npm run build --if-present
-        
   tests:
     name: Check unit tests pass
-    needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -40,4 +22,21 @@ jobs:
     - name: run unit tests
       run: |
         npm test -- --watchAll=false
+        
+  build:
+    name: Check Tellit builds successfully
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: install dependencies
+      run: |
+        npm install
+    - name: run build
+      run: |2
+        npm run build --if-present
         
