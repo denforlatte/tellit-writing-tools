@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getCharacter } from '../../actions/characterActions';
+import { getCharacter, updateCharacter } from '../../actions/characterActions';
 
 import MainMenu from '../../components/MainMenu/MainMenu';
 import SubMenu from '../../components/SubMenu/SubMenu';
@@ -16,9 +16,8 @@ const iconStyle = {
   fontSize: '40px',
 };
 
-const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
+const CharacterPage = ({ isLoading, character, getCharacter, updateCharacter, match }) => {
   const [tab, setTab] = useState('overview');
-  const [characterData, setCharacterData] = useState({});
 
   const { characterId, universeId } = match.params;
   useEffect(() => {
@@ -26,14 +25,13 @@ const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
   }, [getCharacter, characterId, universeId]);
 
   useEffect(() => {
-    setCharacterData(character)
-
     // TODO trigger a save on close
     // return () => alert('hi!');
-  }, [character]);
+  }, []);
 
   // TODO add character state and function to save
-  const updateCharacterData = e => setCharacterData({...characterData, [e.target.name]: e.target.value});
+  // This might be pointless. It needs to be a redux action.
+  const updateCharacterData = e => updateCharacter(universeId, {...character, [e.target.name]: e.target.value});
 
   if (isLoading)
     return (
@@ -95,6 +93,7 @@ CharacterPage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   character: PropTypes.object,
   getCharacter: PropTypes.func.isRequired,
+  updateCharacter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -102,4 +101,4 @@ const mapStateToProps = state => ({
   character: state.characters.selectedCharacter,
 });
 
-export default connect(mapStateToProps, { getCharacter })(CharacterPage);
+export default connect(mapStateToProps, { getCharacter, updateCharacter })(CharacterPage);

@@ -8,6 +8,7 @@ import {
   CHARACTERS_FETCH_ONE_ERROR,
   CHARACTERS_ADD_ONE,
   APP_MODAL_ERROR,
+  CHARACTERS_UPDATE_ONE,
 } from './types';
 
 export const getCharacters = universeId => async dispatch => {
@@ -92,5 +93,40 @@ export const addNewCharacter = ({
       type: APP_MODAL_ERROR,
       payload: [error],
     });
+  }
+};
+
+export const updateCharacter = (universeId, character) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify(character);
+
+  try {
+    const res = await axios.put(
+      `/universes/${universeId}/characters/${character._id}`,
+      body,
+      config
+    );
+
+    dispatch({
+      type: CHARACTERS_UPDATE_ONE,
+      payload: res.data,
+    });
+  } catch (error) {
+    if (error.response?.data) {
+      dispatch({
+        type: APP_MODAL_ERROR,
+        payload: error.response.data.errors,
+      });
+    } else {
+      dispatch({
+        type: APP_MODAL_ERROR,
+        payload: [error.message],
+      });
+    }
   }
 };

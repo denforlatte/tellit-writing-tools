@@ -6,6 +6,7 @@ import {
   CHARACTERS_FETCH_ONE_SUCCESS,
   CHARACTERS_FETCH_ONE_ERROR,
   CHARACTERS_ADD_ONE,
+  CHARACTERS_UPDATE_ONE,
 } from '../actions/types';
 
 const initialState = {
@@ -50,6 +51,7 @@ const charactersReducer = (state = initialState, action) => {
         isLoading: true,
       }
     case CHARACTERS_FETCH_ONE_SUCCESS:
+    case CHARACTERS_UPDATE_ONE:
       return {
         ...state,
         selectedCharacter: payload,

@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from 'reactstrap';
 
-const EditableText = ({ entryName, text, onChange, lineCount = 1 }) => {
+const EditableText = ({ entryName, text, saveValue, lineCount = 1 }) => {
   const [isEditing, setIsEditing] = useState(false)
   const lineHeight = 1.5; // Sorry future Danny. I couldn't think of a better way.
   const inputHeight = 1 + lineCount * lineHeight + 'rem';
+
+  // TODO add onBlur handler function
 
   if (!isEditing) {
     // TODO Remove on click
@@ -19,7 +21,7 @@ const EditableText = ({ entryName, text, onChange, lineCount = 1 }) => {
         style={{height: inputHeight}}
         name={entryName}
         placeholder={text}
-        onChange={e => onChange(e)}
+        onBlur={e => saveValue(e)}
       />
     );
   }
@@ -28,7 +30,7 @@ const EditableText = ({ entryName, text, onChange, lineCount = 1 }) => {
 EditableText.propTypes = {
   entryName: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  saveValue: PropTypes.func.isRequired,
   lineCount: PropTypes.number,
 };
 

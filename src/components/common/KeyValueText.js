@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import EditableText from './EditableText';
 
-const KeyValueText = ({entryName, value, onChange}) => {
+const KeyValueText = ({entryName, value, saveValue}) => {
   return (
     <div>
       {entryName}
-      <EditableText entryName={entryName} text={value} onChange={onChange}/>
+      <EditableText entryName={entryName} text={value} saveValue={saveValue}/>
     </div>
   )
 }
@@ -15,7 +15,7 @@ const KeyValueText = ({entryName, value, onChange}) => {
 KeyValueText.propTypes = {
   entryName: PropTypes.string.isRequired,
   value: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  saveValue: PropTypes.func.isRequired,
 }
 
 export default KeyValueText

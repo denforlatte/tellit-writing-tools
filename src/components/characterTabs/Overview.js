@@ -7,7 +7,7 @@ const Overview = ({character, updateCharacterData}) => {
   return (
     <div>
       Character Overview
-      <KeyValueText entryName={"importance"} value={"blah blah blah"} onChange={updateCharacterData} />
+      <KeyValueText entryName={"importance"} value={character.importance} saveValue={updateCharacterData} />
     </div>
   )
 }
