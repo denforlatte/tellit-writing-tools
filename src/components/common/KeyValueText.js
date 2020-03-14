@@ -6,7 +6,8 @@ import EditableText from './EditableText';
 const KeyValueText = ({entryName, value, onChange}) => {
   return (
     <div>
-      <EditableText entryName={entryName} text={`${entryName}: ${value}`} onChange={onChange}/>
+      {entryName}
+      <EditableText entryName={entryName} text={value} onChange={onChange}/>
     </div>
   )
 }

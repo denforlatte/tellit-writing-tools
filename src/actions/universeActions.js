@@ -16,7 +16,7 @@ export const getUniverses = () => async dispatch => {
   });
 
   try {
-    const res = await axios.get('universes');
+    const res = await axios.get('/universes');
 
     dispatch({
       type: UNIVERSES_FETCH_SUCCESS,

@@ -23,7 +23,7 @@ export const logInUser = ({ email, password }) => async dispatch => {
 
   try {
     // TODO refactor host
-    const res = await axios.post('users/login', body, config);
+    const res = await axios.post('/users/login', body, config);
     if (!res.data.token) throw new Error('No token.');
 
     setAuthHeader(res.data.token);

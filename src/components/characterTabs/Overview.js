@@ -3,17 +3,18 @@ import PropTypes from 'prop-types'
 
 import KeyValueText from '../common/KeyValueText';
 
-const Overview = props => {
+const Overview = ({character, updateCharacterData}) => {
   return (
     <div>
       Character Overview
-      <KeyValueText entryName={"Test name"} value={"blah blah blah"} onChange={(x) => console.log(x)} />
+      <KeyValueText entryName={"importance"} value={"blah blah blah"} onChange={updateCharacterData} />
     </div>
   )
 }
 
 Overview.propTypes = {
   character: PropTypes.object.isRequired,
+  updateCharacterData: PropTypes.func.isRequired,
 }
 
 export default Overview

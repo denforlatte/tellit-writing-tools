@@ -18,6 +18,7 @@ const iconStyle = {
 
 const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
   const [tab, setTab] = useState('overview');
+  const [characterData, setCharacterData] = useState({});
 
   const { characterId, universeId } = match.params;
   useEffect(() => {
@@ -25,10 +26,14 @@ const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
   }, [getCharacter, characterId, universeId]);
 
   useEffect(() => {
-    return () => alert('hi!');
-  }, []);
+    setCharacterData(character)
+
+    // TODO trigger a save on close
+    // return () => alert('hi!');
+  }, [character]);
 
   // TODO add character state and function to save
+  const updateCharacterData = e => setCharacterData({...characterData, [e.target.name]: e.target.value});
 
   if (isLoading)
     return (
@@ -40,7 +45,7 @@ const CharacterPage = ({ isLoading, character, getCharacter, match }) => {
   const getSelectedTab = () => {
     switch (tab) {
       case 'overview':
-        return <Overview character={character} />;
+        return <Overview character={character} updateCharacterData={updateCharacterData}/>;
       case 'physical':
         return <div>physical</div>;
       case 'mental':
