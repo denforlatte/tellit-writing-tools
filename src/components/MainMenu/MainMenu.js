@@ -16,6 +16,7 @@ import {
 import { logout } from '../../actions/userActions';
 
 const MainMenu = ({
+  editable,
   user,
   universe,
   isEditing,
@@ -63,7 +64,7 @@ const MainMenu = ({
         <Link to='/' onClick={toggleMenu}>
           <h1>Tellit</h1>
         </Link>
-        <Button onClick={toggleEdit}>Edit</Button>
+        {editable ? <Button onClick={toggleEdit}>Edit</Button> : <div style={{width: '70px'}}></div>}
         <Collapse isOpen={isOpen} navbar>
           <hr />
           {menuContent}
@@ -75,6 +76,7 @@ const MainMenu = ({
 };
 
 MainMenu.propTypes = {
+  editable: PropTypes.bool,
   user: PropTypes.bool.isRequired,
   universe: PropTypes.object,
   isEditing: PropTypes.bool.isRequired,

@@ -15,7 +15,7 @@ const Universes = ({ getUniverses, createUniverse, universes }) => {
 
   return (
     <>
-      <MainMenu editable />
+      <MainMenu />
       <main>
         <Container>
         <br />

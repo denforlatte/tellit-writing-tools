@@ -2,11 +2,11 @@ import React from 'react'
 import PrivateRoute from './PrivateRoute';
 import { Switch, Route } from 'react-router-dom';
 
-import Login from './views/Login';
-import Universes from './views/Universes';
-import Universe from './views/Universe';
-import Characters from './views/CharactersPage/CharactersPage';
-import Character from './views/CharacterPage/CharacterPage';
+import Login from './pages/Login';
+import Universes from './pages/Universes';
+import Universe from './pages/Universe';
+import Characters from './pages/CharactersPage/CharactersPage';
+import Character from './pages/CharacterPage/CharacterPage';
 
 const Routes = props => {
   return (

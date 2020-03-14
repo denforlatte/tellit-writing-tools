@@ -14,7 +14,7 @@ import { characterLink } from './characters.module.scss';
 
 import { getCharacters, addNewCharacter } from '../../actions/characterActions';
 
-import MainMenu from '../components/MainMenu/MainMenu';
+import MainMenu from '../../components/MainMenu/MainMenu';
 
 export const CharactersPage = ({
   characters: { isLoading, majorCharacters, minorCharacters },
